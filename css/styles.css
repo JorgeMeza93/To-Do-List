@@ -1,0 +1,141 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    background-color: #3c87ff;
+    overflow: hidden;
+}
+.wrapper{
+    max-width: 485px;
+    margin: 135px auto;
+    background-color: #fff;
+    border-radius: 7px;
+    padding: 28px 0 ;
+}
+.task-input{
+    height: 52px;
+    padding: 0 25px;
+    position: relative;
+}
+.task-input img{
+    position: absolute;
+    top: 50%;
+    transform: translate(17px, -50%);    /* Si trabajamos con porcentajes los movemos con respecto al tamaño del objeto, en este caso la imagen*/
+    
+}
+.task-input input{
+    height: 100%;
+    width: 100%;
+    padding: 0 20px 0 53px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #999;
+    outline: none;
+}
+.task-input input::placeholder{
+    color: #bfbfbf;
+}
+.controls{
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 25px;
+    border-bottom: 1px solid #ccc;
+    
+}
+.controls .clear-btn{
+    outline: none;
+    border: none;
+    color: #fff;
+    padding: 7px 13px;
+    background-color: #3c87ff;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 4px;
+}
+.filters span{
+    margin: 0 8px;
+    cursor: pointer;
+}
+.filters span.active{
+    color: #3c87ff;
+}
+.filters span:first-child{
+    margin-left: 0;
+}
+.task{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.task-box{
+    margin: 20px 25px;
+}
+.task-box .task{
+    list-style: none ;
+    font-size: 17px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 16px;
+}
+.task-box .task:last-child{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.task__field{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.task__field input{
+    margin-top: 6px;
+    margin-right: 12px;
+}
+.settings{
+    position: relative;
+    cursor: pointer;
+
+}
+.settings .task-menu{
+    position: absolute;
+    z-index: 2;
+    right: -5px;
+    bottom: -65px;
+    list-style: none;
+    padding: 5px 0;
+    background-color: #fff;
+    box-shadow: 0 0 6px rgba(0 0 0 0.15);
+    border-radius: 5px;
+    transform: scale(0);
+    transform-origin: top right;
+    transition-property: transform;
+    transition-duration: .3s;
+    transition-timing-function: ease;
+}
+.settings:hover .task-menu{
+    transform: scale(1);
+}
+.task-menu li{
+    display: flex;
+    justify-content: flex-start;
+    height: 35px;
+    padding: 17px 15px;
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+.task-menu li:last-child{
+    margin-bottom: 0;
+}
+.task-menu li:hover{
+    background-color: #f5f5f5;
+}
+.task-menu li i{
+    padding-right: 8px;
+}
+
