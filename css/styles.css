@@ -138,4 +138,6 @@ body{
 .task-menu li i{
     padding-right: 8px;
 }
-
+.task p.checked{
+    text-decoration: line-through;
+}
