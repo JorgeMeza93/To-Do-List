@@ -10,16 +10,17 @@ function showTodo(){
     if(todos){
         clearHTML();
         todos.forEach( (todo, id) => {   // <-- if there are two parameters the second one is an autoincrement value
+            let isCompleted = todo.status === "completed" ? "cheked" : "";
             const li = document.createElement("li");
                 li.classList.add("task"); 
                 li.innerHTML = `
                     <div class="task__field">
                         <label for=""></label>
-                        <input onclick="updatedStatus(this)" type="checkbox" name="" id="1">    <!-- this just makes reference to the same objet checkbox-->
-                        <p>${todo.name}</p>
+                        <input onclick="updatedStatus(this)" type="checkbox" name="" id="1" ${isCompleted}>    <!-- this just makes reference to the same objet checkbox-->
+                        <p class="${isCompleted}">${todo.name}</p>
                     </div>
                     <div class="settings">
-                        <i class="uil uil-ellipsis-h"></i>
+                        <i onclick="showMenu(this)" class="uil uil-ellipsis-h"></i>
                         <ul class="task-menu">
                             <li class="uil uil-pen">Edit</li>
                             <li class="uil uil-trash">Delete</li>
@@ -52,13 +53,24 @@ function clearHTML(){
 }
 
 function updatedStatus(selectedTask){
-    let taskName = selectedTask.parentElement.lastElementChild;
+    let taskName = selectedTask.parentElement.lastElementChild;  // <-- From the checkbox input we reach the last element of the parent element, the p element
     console.log(taskName);
     if(selectedTask.checked){
-        taskName.classList.add("checked");
-        todos[selectedTask.id].status = "completed";
+        taskName.classList.add("checked");    // <-- if the checkbox is cheked then we add the class checked to line through the text
+        todos[selectedTask.id].status = "completed"; // <-- We change the propperty status of the selected task from pending to completed
     }
     else{
         taskName.classList.remove("checked");
-    }
+        todos[selectedTask.id].status = "pending";
+    } 
+    localStorage.setItem("todo-list", JSON.stringify(todos));   // <-- Storage the changes into LocalStorage
+}
+function showMenu(selectedTask){
+    let taskMenu = selectedTask.parentElement.lastElementChild; // <-- From the icon we pass to the parent element the div container and then we select the last child "Delete"
+    taskMenu.classList.add("show");
+    document.addEventListener("click", e => {
+        if(e.target.tagName != "I" || e.target != selectedTask){
+            taskMenu.classList.remove("show");
+        }
+    });
 }
