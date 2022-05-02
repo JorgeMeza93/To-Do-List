@@ -22,8 +22,8 @@ function showTodo(){
                     <div class="settings">
                         <i onclick="showMenu(this)" class="uil uil-ellipsis-h"></i>
                         <ul class="task-menu">
-                            <li class="uil uil-pen">Edit</li>
-                            <li class="uil uil-trash">Delete</li>
+                            <li onclick="editTask( ${id}, '${todo.name}')" class="uil uil-pen">Edit</li>
+                            <li onclick="deleteTask( ${id} )" class="uil uil-trash">Delete</li>
                         </ul>
                     </div>       
             `;
@@ -74,3 +74,11 @@ function showMenu(selectedTask){
         }
     });
 }
+function deleteTask(id){
+    todos.splice(id, 1);  // <-- Removing selected task from todos array
+    localStorage.setItem("todo-list", JSON.stringify(todos));
+    showTodo();
+}
+function editTask(id, task){
+    taskInput.value = task;
+} 
