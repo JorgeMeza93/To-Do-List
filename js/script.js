@@ -2,6 +2,8 @@
 const taskInput = document.querySelector(".task-input input");
 let todos = JSON.parse(localStorage.getItem("todo-list"));    // <-- We retrieve the value of the todos
 const taskBox = document.querySelector(".task-box");
+let editedId;
+let isEdited = false;
 
 //Listeners
 document.addEventListener("DOMContentLoaded", showTodo);
@@ -35,12 +37,18 @@ function showTodo(){
 
 taskInput.addEventListener("keyup", e => {
     let userTask = taskInput.value.trim();
-    if(e.key === "Enter" && userTask ){       
-        if(!todos){
-            todos = [];   // <-- If array todos doesn't exit then create an empty array
+    if(e.key === "Enter" && userTask ){
+        if(isEdited){
+            if(!todos){
+                todos = [];   // <-- If array todos doesn't exit then create an empty array
+            }
+            let taskInfo = {name: userTask, status: "pending"};
+            todos.push(taskInfo);
         }
-        let taskInfo = {name: userTask, status: "pending"};
-        todos.push(taskInfo);
+        else{
+            todos[editedId].name = userTask
+        }
+        taskInput.value = "";       
         localStorage.setItem("todo-list", JSON.stringify(todos)); // <-- Local storage only storage string so we need to convert the array into a string
         showTodo();
      }
@@ -80,5 +88,7 @@ function deleteTask(id){
     showTodo();
 }
 function editTask(id, task){
+    editedId = id;
+    isEdited = true;  
     taskInput.value = task;
 } 
